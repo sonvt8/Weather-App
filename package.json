@@ -1,0 +1,22 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Make an API Weather App. instructor:Udemy",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sonvt8/Weather-App.git"
+  },
+  "author": "Udemy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sonvt8/Weather-App/issues"
+  },
+  "homepage": "https://github.com/sonvt8/Weather-App#readme",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
