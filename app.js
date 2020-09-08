@@ -1,14 +1,25 @@
 const request = require('request')
+const yargs = require('yargs')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
-forecast(106.63333, 10.81667, (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
-  })
 
-geocode('Maputo Mozambique', (err, data) => {
-    console.log('Error:', err)
-    console.log('Data:', data)
-})
+location = process.argv[2]
+console.log(process.argv)
 
+if(!location){
+    return console.log('Please provide the location in your command')
+}else{
+    geocode(location, (err, data) => {
+        if(err){
+            return console.log(err)
+        }
+    
+        forecast(data.long, data.lat, (error, output) => {
+            if(error){
+                return console.log(error)
+            }
+            console.log('Country:' + data.location + ' the temperature outside is ' + output.temperature + ' Celcius but it feels like ' + output.feelslike + ' Celcius. Weather description is ' + output.weather_descriptions)
+        })
+    })
+}
