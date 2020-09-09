@@ -1,5 +1,3 @@
-const request = require('request')
-const yargs = require('yargs')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
@@ -10,16 +8,16 @@ console.log(process.argv)
 if(!location){
     return console.log('Please provide the location in your command')
 }else{
-    geocode(location, (err, data) => {
+    geocode(location, (err, {long, lat, location} = {}) => { // if object parameter not exist, it will get default value (get empty in this case)
         if(err){
             return console.log(err)
         }
     
-        forecast(data.long, data.lat, (error, output) => {
+        forecast(long, lat, (error, {temperature, feelslike, weather_descriptions} = {}) => { 
             if(error){
                 return console.log(error)
             }
-            console.log('Country:' + data.location + ' the temperature outside is ' + output.temperature + ' Celcius but it feels like ' + output.feelslike + ' Celcius. Weather description is ' + output.weather_descriptions)
+            console.log('Country:' + location + ' the temperature outside is ' + temperature + ' Celcius but it feels like ' + feelslike + ' Celcius. Weather description is ' + weather_descriptions)
         })
     })
 }
